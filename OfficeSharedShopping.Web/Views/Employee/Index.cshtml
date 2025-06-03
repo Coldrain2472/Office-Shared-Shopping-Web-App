@@ -1,0 +1,49 @@
+﻿@using OfficeSharedShopping.Web.Models.Employee
+@model EmployeeListViewModel
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Employees</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            @if (Model.Employees != null && Model.Employees.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Department</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var employee in Model.Employees)
+                            {
+                                <tr>
+                                    <td>@employee.Name</td>
+                                    <td>@employee.Email</td>
+                                    <td>@employee.Department</td>
+                                    <td>@employee.Phone</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 text-muted">
+                    Total Employees: <strong>@Model.TotalCount</strong>
+                </div>
+            }
+            else
+            {
+                <div class="p-4">
+                    <div class="alert alert-info mb-0">No employees found.</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

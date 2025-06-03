@@ -1,0 +1,44 @@
+﻿@model OfficeSharedShopping.Web.Models.Home.ShoppingSessionDetailsListViewModel
+
+@{
+    ViewData["Title"] = "Shopping Session Details";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Details for Session #@Model.ShoppingSessionId</h2>
+
+    @if (Model.RequestDetails.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Max Price</th>
+                        <th>Total Owed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in Model.RequestDetails)
+                    {
+                        <tr>
+                            <td>@request.EmployeeName</td>
+                            <td>@request.ProductName</td>
+                            <td>@request.Quantity</td>
+                            <td>@request.MaxPrice.ToString("C")</td>
+                            <td>@request.TotalOwed.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">No requests found for this session.</div>
+    }
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Ended Sessions</a>
+</div>

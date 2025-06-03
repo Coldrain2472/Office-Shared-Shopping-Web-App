@@ -1,0 +1,27 @@
+﻿@* @model int
+@{
+    ViewData["Title"] = "End Shopping Session";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">End Shopping Session</h2>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="alert alert-warning">
+        <strong>Are you sure you want to end this shopping session?</strong><br />
+        This action cannot be undone.
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input asp-for="@Model" type="hidden" />
+        <button type="submit" class="btn btn-danger">Yes, End Session</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+ *@

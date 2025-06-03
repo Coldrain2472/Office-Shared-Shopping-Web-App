@@ -1,0 +1,42 @@
+﻿@using OfficeSharedShopping.Web.Models.ShoppingSession
+@model CreateShoppingSessionViewModel
+
+@{
+    ViewData["Title"] = "Create Shopping Session";
+}
+
+<h2>Create Shopping Session</h2>
+
+<form asp-action="Create" method="post" class="mt-4">
+    <div class="mb-3">
+        <label class="form-label">Store</label>
+        <input type="text" class="form-control" value="@Model.StoreName" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Created By</label>
+        <input type="text" class="form-control" value="@Model.CreatorName" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Created At</label>
+        <input type="text" class="form-control" value="@Model.CreatedAt.ToString("g")" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Deadline" class="form-label"></label>
+        <input asp-for="Deadline" class="form-control" type="datetime-local" />
+        <span asp-validation-for="Deadline" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="StoreId" />
+    <input type="hidden" asp-for="CreatorId" />
+    <input type="hidden" asp-for="CreatedAt" />
+    <input type="hidden" asp-for="IsActive" />
+
+    <button type="submit" class="btn btn-primary">Create Session</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,48 @@
+﻿@model OfficeSharedShopping.Web.Models.SessionRequest.SessionRequestViewModel
+
+@{
+    ViewData["Title"] = "Edit Session Request";
+}
+
+<div class="container mt-4">
+    <h2>Edit Session Request</h2>
+
+    <form asp-action="Edit" method="post" class="mt-4">
+        <input type="hidden" asp-for="SessionRequestId" />
+        <input type="hidden" asp-for="ShoppingSessionId" />
+        <input type="hidden" asp-for="EmployeeId" />
+        <input type="hidden" asp-for="CreatedAt" />
+
+        <div class="mb-3">
+            <label class="form-label">Employee</label>
+            <input type="text" class="form-control" value="@Model.EmployeeName" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductId" class="form-label">Product</label>
+            <select asp-for="ProductId" class="form-select" asp-items="Model.ProductsSelectList">
+                <option value="">-- Select Product --</option>
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quantity" class="form-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="MaxPrice" class="form-label"></label>
+            <input asp-for="MaxPrice" class="form-control" />
+            <span asp-validation-for="MaxPrice" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,64 @@
+﻿@using OfficeSharedShopping.Web.Models.ShoppingSession
+@model ShoppingSessionListViewModel
+
+@{
+    ViewData["Title"] = "Active Shopping Sessions";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Active Shopping Sessions</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            @if (Model.ShoppingSessions != null && Model.ShoppingSessions.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Session ID</th>
+                                <th>Store</th>
+                                <th>Created At</th>
+                                <th>Deadline</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var session in Model.ShoppingSessions)
+                            {
+                                <tr>
+                                    <td>@session.ShoppingSessionId</td>
+                                    <td>@session.StoreName</td>
+                                    <td>@session.CreatedAt.ToString("g")</td>
+                                    <td>@session.Deadline.ToString("g")</td>
+                                    <td class="d-flex gap-2">
+                                        <a class="btn btn-sm btn-success"
+                                           asp-controller="SessionRequest"
+                                           asp-action="Create"
+                                           asp-route-shoppingSessionId="@session.ShoppingSessionId">
+                                            Create Request
+                                        </a>
+
+                                        <form asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to end this reservation?');" style="display:inline;">
+                                            <input type="hidden" name="shoppingSessionId" value="@session.ShoppingSessionId" />
+                                            <button type="submit" class="btn btn-danger btn-sm">End</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 text-muted">
+                    Total Active Sessions: <strong>@Model.TotalCount</strong>
+                </div>
+            }
+            else
+            {
+                <div class="p-4">
+                    <div class="alert alert-info mb-0">No active sessions found.</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

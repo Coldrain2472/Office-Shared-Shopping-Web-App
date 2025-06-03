@@ -1,0 +1,52 @@
+﻿@using OfficeSharedShopping.Web.Models.Store
+@model StoreListViewModel
+@{
+    ViewData["Title"] = "Stores";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Stores</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            @if (Model.Stores != null && Model.Stores.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Store Name</th>
+                                <th style="width: 180px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var store in Model.Stores)
+                            {
+                                <tr>
+                                    <td>@store.Name</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary"
+                                           asp-controller="ShoppingSession"
+                                           asp-action="Create"
+                                           asp-route-storeId="@store.StoreId">
+                                            Create Session
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 text-muted">
+                    Total Stores: <strong>@Model.TotalCount</strong>
+                </div>
+            }
+            else
+            {
+                <div class="p-4">
+                    <div class="alert alert-info mb-0">No stores found.</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
